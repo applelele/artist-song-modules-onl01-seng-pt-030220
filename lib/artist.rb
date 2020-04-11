@@ -1,6 +1,10 @@
 require 'pry'
 
+require_relative './concerns/memorable.rb'
+
 class Artist
+  extend Memorable
+
   attr_accessor :name
   attr_reader :songs
 
@@ -19,17 +23,11 @@ class Artist
     @@artists
   end
 
-  def self.reset_all
-    self.all.clear
-  end
-
-  def self.count
-    self.all.count
-  end
-
   def add_song(song)
     @songs << song
     song.artist = self
+    #<Artist:0x00 @name="" @song="#<Song:0x00 @title="" @artist="self">"
+    # not <Song:0x00 @name="", @artist="#<Artist:0x00 @name="" @song=[]>"
   end
 
   def add_songs(songs)
@@ -37,6 +35,6 @@ class Artist
   end
 
   def to_param
-    name.downcase.gsub(' ', '-')
+    name.downcase.gsub(' ', '-') #.gsub replace ' ' with '-'
   end
 end
