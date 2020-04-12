@@ -6,16 +6,16 @@ require_relative './concerns/paramable.rb'
 
 class Song
   extend Memorable::ClassMethods
-  include Memorable::instanceMethods
+  include Memorable::instanceMethods, Findable, Paramable
 
   attr_accessor :name
   attr_reader :artist
 
   @@songs = []
 
-  def initialize
-    self.class.all << self #@@songs << self
-  end
+  # def initialize
+  #   self.class.all << self #@@songs << self
+  # end
 
   # def self.find_by_name(name)
   #   @@songs.detect{|a| a.name == name}
